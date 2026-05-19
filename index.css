@@ -7,8 +7,6 @@
     --accent: #275ca8;
     --accent-rgb: 39 92 168;
     --accent-strong: #cf3f49;
-    --portrait-width: 306px;
-    --portrait-ratio: 306 / 610;
     --sun: #f4b942;
     --shadow: 0 22px 60px rgb(23 32 42 / 0.12);
     --header-height: 76px;
@@ -51,8 +49,6 @@ body[data-locale="es"] {
     --accent: #0f7f70;
     --accent-rgb: 15 127 112;
     --accent-strong: #e0523f;
-    --portrait-width: 306px;
-    --portrait-ratio: 306 / 610;
 }
 
 a {
@@ -317,30 +313,43 @@ h3 {
 
 .profile-stage {
     justify-self: end;
-    width: min(100%, var(--portrait-width));
+    width: fit-content;
+    max-width: 100%;
 }
 
 .portrait-frame {
-    width: 100%;
-    aspect-ratio: var(--portrait-ratio);
+    position: relative;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
     overflow: hidden;
     border: 1px solid rgb(23 32 42 / 0.12);
     border-radius: 8px;
     background: var(--panel);
     box-shadow: var(--shadow);
+    line-height: 0;
 }
 
 .portrait-frame img {
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: opacity 240ms ease, transform 360ms ease;
+    max-width: 100%;
+    height: auto;
 }
 
-.portrait-frame img.is-swapping {
-    opacity: 0.18;
-    transform: scale(1.03);
+.portrait-next {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    object-fit: cover;
+    pointer-events: none;
+    transition: opacity 200ms ease-out;
+}
+
+.portrait-frame.is-swapping .portrait-next {
+    opacity: 1;
 }
 
 .profile-caption {
@@ -559,7 +568,8 @@ h3 {
     }
 
     .profile-stage {
-        width: min(100%, var(--portrait-width));
+        width: fit-content;
+        max-width: 100%;
         justify-self: start;
     }
 

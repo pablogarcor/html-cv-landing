@@ -6,16 +6,16 @@ const languageNames = {
 const profileThemes = {
     es: {
         image: "./assets/profile-es.webp",
-        width: 306,
-        height: 610,
+        width: 298,
+        height: 600,
         accent: "#0f7f70",
         accentRgb: "15 127 112",
         strong: "#e0523f",
     },
     us: {
         image: "./assets/profile-us.webp",
-        width: 306,
-        height: 610,
+        width: 298,
+        height: 600,
         accent: "#275ca8",
         accentRgb: "39 92 168",
         strong: "#cf3f49",
@@ -168,8 +168,13 @@ const documentLanguages = {
 };
 const translatableNodes = document.querySelectorAll("[data-i18n]");
 const languageButtons = document.querySelectorAll("[data-language]");
+const profileFrame = document.querySelector(".portrait-frame");
 const profileImage = document.querySelector("#profileImage");
+const profileImageNext = document.querySelector("#profileImageNext");
 const metaDescription = document.querySelector("meta[name='description']");
+const profileSwapDuration = 200;
+let profileSwapTimer;
+let profileSwapId = 0;
 
 function applyTheme(language) {
     const theme = profileThemes[language];
@@ -178,23 +183,60 @@ function applyTheme(language) {
     document.body.style.setProperty("--accent", theme.accent);
     document.body.style.setProperty("--accent-rgb", theme.accentRgb);
     document.body.style.setProperty("--accent-strong", theme.strong);
-    document.body.style.setProperty("--portrait-width", `${theme.width}px`);
-    document.body.style.setProperty("--portrait-ratio", `${theme.width} / ${theme.height}`);
 }
 
 function swapProfileImage(language, dictionary) {
     const theme = profileThemes[language];
+    const currentImage = profileImage.getAttribute("src");
 
-    profileImage.classList.add("is-swapping");
-    window.setTimeout(() => {
+    profileSwapId += 1;
+    window.clearTimeout(profileSwapTimer);
+    profileFrame.classList.remove("is-swapping");
+
+    if (currentImage === theme.image) {
+        profileImage.alt = dictionary.profileAlt;
+        profileImage.width = theme.width;
+        profileImage.height = theme.height;
+        profileImageNext.src = theme.image;
+        profileImageNext.width = theme.width;
+        profileImageNext.height = theme.height;
+        return;
+    }
+
+    const swapId = profileSwapId;
+
+    profileImageNext.src = theme.image;
+    profileImageNext.width = theme.width;
+    profileImageNext.height = theme.height;
+
+    const completeSwap = () => {
+        if (swapId !== profileSwapId) {
+            return;
+        }
+
         profileImage.src = theme.image;
         profileImage.alt = dictionary.profileAlt;
         profileImage.width = theme.width;
         profileImage.height = theme.height;
-    }, 90);
-    window.setTimeout(() => {
-        profileImage.classList.remove("is-swapping");
-    }, 360);
+        profileFrame.classList.remove("is-swapping");
+    };
+
+    const startSwap = () => {
+        if (swapId !== profileSwapId) {
+            return;
+        }
+
+        profileFrame.classList.remove("is-swapping");
+        void profileFrame.offsetWidth;
+        profileFrame.classList.add("is-swapping");
+        profileSwapTimer = window.setTimeout(completeSwap, profileSwapDuration);
+    };
+
+    if (profileImageNext.complete) {
+        startSwap();
+    } else {
+        profileImageNext.addEventListener("load", startSwap, { once: true });
+    }
 }
 
 function normalizeLanguage(language) {
