@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="es">
+<html lang="en-US">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Landing CV bilingue para Pablo, desarrollador web orientado a producto.">
+    <meta name="description" content="Bilingual CV landing page for Pablo, a product-minded web developer.">
     <title>Pablo | CV Landing</title>
     <link rel="stylesheet" href="./index.css">
     <script src="./index.js" defer></script>
 </head>
-<body>
+<body data-locale="us">
     <header class="site-header">
         <a class="brand" href="#top" aria-label="Pablo CV">
             <span class="brand-mark" aria-hidden="true">P</span>
@@ -16,74 +16,74 @@
         </a>
 
         <nav class="site-nav" aria-label="Primary navigation">
-            <a href="#profile" data-i18n="navProfile">Perfil</a>
-            <a href="#experience" data-i18n="navExperience">Experiencia</a>
+            <a href="#profile" data-i18n="navProfile">Profile</a>
+            <a href="#experience" data-i18n="navExperience">Experience</a>
             <a href="#skills" data-i18n="navSkills">Skills</a>
-            <a href="#contact" data-i18n="navContact">Contacto</a>
+            <a href="#contact" data-i18n="navContact">Contact</a>
         </nav>
 
         <div class="language-switcher" role="group" aria-label="Language selector">
-            <button class="language-button" type="button" data-language="es" aria-pressed="true">ES</button>
-            <button class="language-button" type="button" data-language="us" aria-pressed="false">US</button>
+            <button class="language-button" type="button" data-language="us" aria-pressed="true">US</button>
+            <button class="language-button" type="button" data-language="es" aria-pressed="false">ES</button>
         </div>
     </header>
 
     <main id="top">
         <section class="hero">
             <div class="hero-copy reveal">
-                <p class="eyebrow" data-i18n="eyebrow">CV landing bilingue</p>
+                <p class="eyebrow" data-i18n="eyebrow">Bilingual CV landing</p>
                 <h1>
                     <span data-i18n="heroName">Pablo</span>
-                    <span data-i18n="heroRole">Desarrollador web orientado a producto</span>
+                    <span data-i18n="heroRole">Product-minded web developer</span>
                 </h1>
                 <p class="hero-summary" data-i18n="heroSummary">
-                    Diseno y desarrollo experiencias web claras, rapidas y faciles de mantener, con foco en producto, detalle visual y entrega real.
+                    I design and build clear, fast, maintainable web experiences with product focus, visual care, and real delivery discipline.
                 </p>
 
                 <div class="hero-actions" aria-label="Main actions">
                     <a class="button button-primary" href="mailto:pablo@example.com">
-                        <span data-i18n="primaryAction">Hablemos</span>
+                        <span data-i18n="primaryAction">Email me</span>
                         <span class="button-icon" aria-hidden="true">-&gt;</span>
                     </a>
                     <a class="button button-secondary" href="#experience">
-                        <span data-i18n="secondaryAction">Ver experiencia</span>
+                        <span data-i18n="secondaryAction">View experience</span>
                     </a>
                 </div>
 
                 <div class="signal-grid" aria-label="Professional focus">
                     <div>
                         <strong data-i18n="stat1Value">Frontend</strong>
-                        <span data-i18n="stat1Label">Interfaces responsivas</span>
+                        <span data-i18n="stat1Label">Responsive interfaces</span>
                     </div>
                     <div>
-                        <strong data-i18n="stat2Value">Producto</strong>
-                        <span data-i18n="stat2Label">Decisiones medibles</span>
+                        <strong data-i18n="stat2Value">Product</strong>
+                        <span data-i18n="stat2Label">Measurable decisions</span>
                     </div>
                     <div>
                         <strong data-i18n="stat3Value">AI</strong>
-                        <span data-i18n="stat3Label">Automatizacion aplicada</span>
+                        <span data-i18n="stat3Label">Applied automation</span>
                     </div>
                 </div>
             </div>
 
             <aside class="profile-stage reveal" aria-labelledby="profile-caption-title">
                 <div class="portrait-frame">
-                    <img id="profileImage" src="./assets/profile-es.webp" width="313" height="610" alt="Retrato de Pablo para la version espanola">
+                    <img id="profileImage" src="./assets/profile-us.webp" width="306" height="610" alt="Portrait of Pablo for the US version">
                 </div>
                 <div class="profile-caption">
-                    <p class="profile-language" id="profile-caption-title" data-i18n="profileTitle">Modo ES</p>
-                    <p id="profileReference" data-i18n="profileReference">Criterio claro, ritmo mediterraneo y producto listo para salir.</p>
+                    <p class="profile-language" id="profile-caption-title" data-i18n="profileTitle">US mode</p>
+                    <p id="profileReference" data-i18n="profileReference">Clear async writing, global context, and delivery without theatre.</p>
                 </div>
             </aside>
         </section>
 
         <section class="content-section" id="profile">
             <div class="section-heading reveal">
-                <p class="overline" data-i18n="sectionProfileEyebrow">Perfil</p>
+                <p class="overline" data-i18n="sectionProfileEyebrow">Profile</p>
                 <div>
-                    <h2 data-i18n="sectionProfileTitle">Un CV que funciona como conversacion.</h2>
+                    <h2 data-i18n="sectionProfileTitle">A CV that behaves like a conversation.</h2>
                     <p data-i18n="sectionProfileIntro">
-                        La pagina resume forma de trabajar, criterio tecnico y energia visual en un formato directo para recruiters, clientes y equipos.
+                        The page compresses working style, technical judgment, and visual energy into a direct format for recruiters, clients, and teams.
                     </p>
                 </div>
             </div>
@@ -91,53 +91,53 @@
             <div class="intro-grid">
                 <article class="feature-card reveal">
                     <span class="feature-index">01</span>
-                    <h3 data-i18n="highlight1Title">Pensamiento de producto</h3>
-                    <p data-i18n="highlight1Body">Conecto objetivos, usuarios y restricciones antes de escribir codigo.</p>
+                    <h3 data-i18n="highlight1Title">Product thinking</h3>
+                    <p data-i18n="highlight1Body">I connect goals, users, and constraints before writing code.</p>
                 </article>
                 <article class="feature-card reveal">
                     <span class="feature-index">02</span>
-                    <h3 data-i18n="highlight2Title">Frontend cuidado</h3>
-                    <p data-i18n="highlight2Body">Sistemas UI claros, accesibles y mantenibles para crecer sin friccion.</p>
+                    <h3 data-i18n="highlight2Title">Careful frontend</h3>
+                    <p data-i18n="highlight2Body">Clear, accessible, maintainable UI systems that can grow without friction.</p>
                 </article>
                 <article class="feature-card reveal">
                     <span class="feature-index">03</span>
-                    <h3 data-i18n="highlight3Title">Entrega pragmatica</h3>
-                    <p data-i18n="highlight3Body">Iteraciones cortas, demos frecuentes y documentacion util para decidir mejor.</p>
+                    <h3 data-i18n="highlight3Title">Pragmatic delivery</h3>
+                    <p data-i18n="highlight3Body">Short iterations, frequent demos, and useful documentation for better decisions.</p>
                 </article>
             </div>
         </section>
 
         <section class="content-section" id="experience">
             <div class="section-heading reveal">
-                <p class="overline" data-i18n="sectionExperienceEyebrow">Experiencia</p>
+                <p class="overline" data-i18n="sectionExperienceEyebrow">Experience</p>
                 <div>
-                    <h2 data-i18n="sectionExperienceTitle">Trabajo presentado por impacto, no por ruido.</h2>
+                    <h2 data-i18n="sectionExperienceTitle">Work presented by impact, not noise.</h2>
                     <p data-i18n="sectionExperienceIntro">
-                        Estos bloques son editables: sustituyelos por proyectos reales, metricas y enlaces cuando tengas el contenido definitivo.
+                        These blocks are editable: replace them with real projects, metrics, and links once the final content is ready.
                     </p>
                 </div>
             </div>
 
             <div class="timeline">
                 <article class="timeline-item reveal">
-                    <p class="timeline-date" data-i18n="experience1Date">Actualidad</p>
+                    <p class="timeline-date" data-i18n="experience1Date">Current</p>
                     <div>
-                        <h3 data-i18n="experience1Title">Interfaces de producto para equipos digitales</h3>
-                        <p data-i18n="experience1Body">Diseno de flujos, componentes y paginas que reducen complejidad y aceleran decisiones.</p>
+                        <h3 data-i18n="experience1Title">Product interfaces for digital teams</h3>
+                        <p data-i18n="experience1Body">Flow, component, and page design that reduces complexity and speeds up decisions.</p>
                     </div>
                 </article>
                 <article class="timeline-item reveal">
-                    <p class="timeline-date" data-i18n="experience2Date">Proyecto destacado</p>
+                    <p class="timeline-date" data-i18n="experience2Date">Featured project</p>
                     <div>
-                        <h3 data-i18n="experience2Title">Dashboards y automatizacion aplicada</h3>
-                        <p data-i18n="experience2Body">Integracion de datos, estados vacios y acciones guiadas para operaciones mas claras.</p>
+                        <h3 data-i18n="experience2Title">Dashboards and applied automation</h3>
+                        <p data-i18n="experience2Body">Data integration, empty states, and guided actions for clearer operations.</p>
                     </div>
                 </article>
                 <article class="timeline-item reveal">
-                    <p class="timeline-date" data-i18n="experience3Date">Base tecnica</p>
+                    <p class="timeline-date" data-i18n="experience3Date">Technical base</p>
                     <div>
-                        <h3 data-i18n="experience3Title">Sistemas visuales escalables</h3>
-                        <p data-i18n="experience3Body">Estructura CSS, tokens, patrones responsive y componentes preparados para evolucionar.</p>
+                        <h3 data-i18n="experience3Title">Scalable visual systems</h3>
+                        <p data-i18n="experience3Body">CSS structure, tokens, responsive patterns, and components ready to evolve.</p>
                     </div>
                 </article>
             </div>
@@ -147,9 +147,9 @@
             <div class="section-heading reveal">
                 <p class="overline" data-i18n="sectionSkillsEyebrow">Skills</p>
                 <div>
-                    <h2 data-i18n="sectionSkillsTitle">Stack ligero, criterio fuerte.</h2>
+                    <h2 data-i18n="sectionSkillsTitle">Light stack, strong judgment.</h2>
                     <p data-i18n="sectionSkillsIntro">
-                        La landing esta hecha sin build step para ser facil de revisar, publicar y personalizar.
+                        The landing has no build step, so it is easy to review, publish, and customize.
                     </p>
                 </div>
             </div>
@@ -158,25 +158,25 @@
                 <article class="skill-group reveal">
                     <h3 data-i18n="skill1Title">Frontend</h3>
                     <ul>
-                        <li data-i18n="skill1A">HTML semantico</li>
-                        <li data-i18n="skill1B">CSS responsive</li>
-                        <li data-i18n="skill1C">JavaScript modular</li>
+                        <li data-i18n="skill1A">Semantic HTML</li>
+                        <li data-i18n="skill1B">Responsive CSS</li>
+                        <li data-i18n="skill1C">Modular JavaScript</li>
                     </ul>
                 </article>
                 <article class="skill-group reveal">
-                    <h3 data-i18n="skill2Title">Producto</h3>
+                    <h3 data-i18n="skill2Title">Product</h3>
                     <ul>
-                        <li data-i18n="skill2A">Priorizacion</li>
-                        <li data-i18n="skill2B">Metrica y narrativa</li>
-                        <li data-i18n="skill2C">Prototipado rapido</li>
+                        <li data-i18n="skill2A">Prioritization</li>
+                        <li data-i18n="skill2B">Metrics and narrative</li>
+                        <li data-i18n="skill2C">Fast prototyping</li>
                     </ul>
                 </article>
                 <article class="skill-group reveal">
-                    <h3 data-i18n="skill3Title">Colaboracion</h3>
+                    <h3 data-i18n="skill3Title">Collaboration</h3>
                     <ul>
-                        <li data-i18n="skill3A">Comunicacion async</li>
-                        <li data-i18n="skill3B">Documentacion clara</li>
-                        <li data-i18n="skill3C">Handoffs accionables</li>
+                        <li data-i18n="skill3A">Async communication</li>
+                        <li data-i18n="skill3B">Clear documentation</li>
+                        <li data-i18n="skill3C">Actionable handoffs</li>
                     </ul>
                 </article>
             </div>
@@ -184,14 +184,14 @@
 
         <section class="content-section contact-section" id="contact">
             <div class="contact-panel reveal">
-                <p class="overline" data-i18n="sectionContactEyebrow">Contacto</p>
-                <h2 data-i18n="sectionContactTitle">Trabajemos en algo que merezca ser usado.</h2>
+                <p class="overline" data-i18n="sectionContactEyebrow">Contact</p>
+                <h2 data-i18n="sectionContactTitle">Let us build something worth using.</h2>
                 <p data-i18n="sectionContactIntro">
-                    Actualiza estos enlaces con tu email, LinkedIn, GitHub o portfolio y deja esta seccion lista para convertir visitas en conversaciones.
+                    Update these links with your email, LinkedIn, GitHub, or portfolio and leave this section ready to turn visits into conversations.
                 </p>
                 <div class="contact-actions">
                     <a class="button button-primary" href="mailto:pablo@example.com">
-                        <span data-i18n="emailAction">Enviar email</span>
+                        <span data-i18n="emailAction">Email me</span>
                     </a>
                     <a class="button button-secondary" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
                         <span data-i18n="linkedinAction">LinkedIn</span>
@@ -205,7 +205,7 @@
     </main>
 
     <footer class="site-footer">
-        <p data-i18n="footerText">CV landing vivo, bilingue y preparado para evolucionar con contenido real.</p>
+        <p data-i18n="footerText">A living, bilingual CV landing page ready to evolve with real content.</p>
     </footer>
 </body>
 </html>

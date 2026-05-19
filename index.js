@@ -1,12 +1,12 @@
 const languageNames = {
-    es: "Espanol",
     us: "US English",
+    es: "Espanol",
 };
 
 const profileThemes = {
     es: {
         image: "./assets/profile-es.webp",
-        width: 313,
+        width: 306,
         height: 610,
         accent: "#0f7f70",
         accentRgb: "15 127 112",
@@ -15,7 +15,7 @@ const profileThemes = {
     us: {
         image: "./assets/profile-us.webp",
         width: 306,
-        height: 613,
+        height: 610,
         accent: "#275ca8",
         accentRgb: "39 92 168",
         strong: "#cf3f49",
@@ -160,6 +160,8 @@ const content = {
 };
 
 const supportedLanguages = Object.keys(content);
+const defaultLanguage = "us";
+const languageStorageKey = "cv-language-v2";
 const documentLanguages = {
     es: "es",
     us: "en-US",
@@ -200,7 +202,7 @@ function normalizeLanguage(language) {
         return "us";
     }
 
-    return supportedLanguages.includes(language) ? language : "es";
+    return supportedLanguages.includes(language) ? language : defaultLanguage;
 }
 
 function setLanguage(language) {
@@ -229,7 +231,7 @@ function setLanguage(language) {
     });
 
     try {
-        window.localStorage.setItem("cv-language", nextLanguage);
+        window.localStorage.setItem(languageStorageKey, nextLanguage);
     } catch {
         // The page still works when storage is blocked.
     }
@@ -237,7 +239,7 @@ function setLanguage(language) {
 
 function getInitialLanguage() {
     try {
-        const savedLanguage = window.localStorage.getItem("cv-language");
+        const savedLanguage = window.localStorage.getItem(languageStorageKey);
 
         if (savedLanguage) {
             const normalizedSavedLanguage = normalizeLanguage(savedLanguage);
@@ -247,8 +249,7 @@ function getInitialLanguage() {
         // Ignore storage errors and use the browser language.
     }
 
-    const browserLanguage = window.navigator.language.slice(0, 2).toLowerCase();
-    return normalizeLanguage(browserLanguage);
+    return defaultLanguage;
 }
 
 languageButtons.forEach((button) => {
