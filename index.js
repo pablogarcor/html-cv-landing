@@ -251,7 +251,7 @@ const openGraphTitle = document.querySelector("meta[property='og:title']");
 const openGraphDescription = document.querySelector("meta[property='og:description']");
 const twitterTitle = document.querySelector("meta[name='twitter:title']");
 const twitterDescription = document.querySelector("meta[name='twitter:description']");
-const profileSwapDuration = 200;
+const profileSwapDuration = 0;
 let profileSwapTimer;
 let profileSwapId = 0;
 
@@ -403,22 +403,5 @@ languageButtons.forEach((button) => {
         setLanguage(nextLanguage);
     });
 });
-
-const revealItems = document.querySelectorAll(".reveal");
-
-if ("IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("in-view");
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.16 });
-
-    revealItems.forEach((item) => revealObserver.observe(item));
-} else {
-    revealItems.forEach((item) => item.classList.add("in-view"));
-}
 
 setLanguage(getInitialLanguage());

@@ -346,7 +346,7 @@ h3 {
     opacity: 0;
     object-fit: cover;
     pointer-events: none;
-    transition: opacity 200ms ease-out;
+    transition: none;
 }
 
 .portrait-frame.is-swapping .portrait-next {
@@ -546,9 +546,9 @@ h3 {
 }
 
 .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 520ms ease, transform 520ms ease;
+    opacity: 1;
+    transform: none;
+    transition: none;
 }
 
 .reveal.in-view {
