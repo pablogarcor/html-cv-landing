@@ -24,16 +24,16 @@ const profileThemes = {
 
 const content = {
     es: {
-        metaTitle: "Pablo | Software Developer CV",
-        metaDescription: "CV landing bilingue para Pablo, software developer, founder y creador de producto web.",
-        brand: "Pablo",
+        metaTitle: "Pablo Garcia Ortega | Software Developer",
+        metaDescription: "Pablo Garcia Ortega es software developer, founder y creador de producto web con foco en frontend, backend, automatizacion, Linux y Web3.",
+        brand: "Pablo Garcia Ortega",
         navProfile: "Perfil",
         navExperience: "Experiencia",
         navSkills: "Skills",
         navEducation: "Educacion",
         navContact: "Contacto",
         eyebrow: "Software Developer - Founder - Product builder",
-        heroName: "Pablo",
+        heroName: "Pablo Garcia Ortega",
         heroRole: "Desarrollador que lanza cosas simples y solidas",
         heroSummary: "Convierto ideas en bruto en productos web utiles: frontend, backend, automatizacion y alguna vuelta blockchain, siempre por el camino simple que funciona.",
         primaryAction: "Abrir conversacion",
@@ -46,7 +46,7 @@ const content = {
         stat3Label: "Crypto domains + growth",
         profileTitle: "Modo ES",
         profileReference: "Simple primero, jugueton cuando suma, entregado sin drama.",
-        profileAlt: "Retrato de Pablo para la version espanola",
+        profileAlt: "Retrato de Pablo Garcia Ortega para la version espanola",
         sectionProfileEyebrow: "Perfil",
         sectionProfileTitle: "Autodidacta, inquieto y alergico al exceso.",
         sectionProfileIntro: "Me gusta llevar ideas del papel a la realidad, con ambicion, curiosidad y una defensa firme de la solucion simple que resuelve.",
@@ -122,19 +122,19 @@ const content = {
         emailAction: "Enviar email",
         linkedinAction: "LinkedIn",
         githubAction: "GitHub",
-        footerText: "CV landing bilingue para un software developer que prefiere sistemas simples con personalidad.",
+        footerText: "Pablo Garcia Ortega - CV landing bilingue para un software developer que prefiere sistemas simples con personalidad.",
     },
     us: {
-        metaTitle: "Pablo | Software Developer CV",
-        metaDescription: "Bilingual CV landing page for Pablo, software developer, founder, and product-minded builder.",
-        brand: "Pablo",
+        metaTitle: "Pablo Garcia Ortega | Software Developer",
+        metaDescription: "Pablo Garcia Ortega is a software developer, founder, and product-minded builder focused on frontend, backend, automation, Linux, and Web3.",
+        brand: "Pablo Garcia Ortega",
         navProfile: "Profile",
         navExperience: "Experience",
         navSkills: "Skills",
         navEducation: "Education",
         navContact: "Contact",
         eyebrow: "Software Developer - Founder - Product builder",
-        heroName: "Pablo",
+        heroName: "Pablo Garcia Ortega",
         heroRole: "Software developer who ships simple things well",
         heroSummary: "I turn rough ideas into useful web products: frontend, backend, automation and the occasional blockchain detour, always choosing the simplest path that works.",
         primaryAction: "Start a conversation",
@@ -147,7 +147,7 @@ const content = {
         stat3Label: "Crypto domains + growth",
         profileTitle: "US mode",
         profileReference: "Simple first, playful when useful, shipped without drama.",
-        profileAlt: "Portrait of Pablo for the US version",
+        profileAlt: "Portrait of Pablo Garcia Ortega for the US version",
         sectionProfileEyebrow: "Profile",
         sectionProfileTitle: "Autodidact, restless, allergic to excess.",
         sectionProfileIntro: "I like moving ideas from paper to reality, with ambition, curiosity and a firm bias for the simplest solution that solves.",
@@ -223,7 +223,7 @@ const content = {
         emailAction: "Email me",
         linkedinAction: "LinkedIn",
         githubAction: "GitHub",
-        footerText: "A bilingual CV landing for a software developer who prefers simple systems with personality.",
+        footerText: "Pablo Garcia Ortega - bilingual CV landing for a software developer who prefers simple systems with personality.",
     },
 };
 
@@ -240,6 +240,10 @@ const profileFrame = document.querySelector(".portrait-frame");
 const profileImage = document.querySelector("#profileImage");
 const profileImageNext = document.querySelector("#profileImageNext");
 const metaDescription = document.querySelector("meta[name='description']");
+const openGraphTitle = document.querySelector("meta[property='og:title']");
+const openGraphDescription = document.querySelector("meta[property='og:description']");
+const twitterTitle = document.querySelector("meta[name='twitter:title']");
+const twitterDescription = document.querySelector("meta[name='twitter:description']");
 const profileSwapDuration = 200;
 let profileSwapTimer;
 let profileSwapId = 0;
@@ -322,6 +326,10 @@ function setLanguage(language) {
     document.documentElement.lang = documentLanguages[nextLanguage];
     document.title = dictionary.metaTitle;
     metaDescription.setAttribute("content", dictionary.metaDescription);
+    openGraphTitle.setAttribute("content", dictionary.metaTitle);
+    openGraphDescription.setAttribute("content", dictionary.metaDescription);
+    twitterTitle.setAttribute("content", dictionary.metaTitle);
+    twitterDescription.setAttribute("content", dictionary.metaDescription);
 
     translatableNodes.forEach((node) => {
         const key = node.dataset.i18n;
