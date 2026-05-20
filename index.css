@@ -97,6 +97,7 @@ a {
 
 .site-nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 4px;
 }
@@ -453,6 +454,32 @@ h3 {
 
 .timeline-item p:last-child {
     margin-bottom: 0;
+}
+
+.timeline-company {
+    margin-bottom: 10px;
+    color: var(--ink);
+    font-weight: 800;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tag-list li {
+    min-height: 32px;
+    padding: 6px 9px;
+    border: 1px solid rgb(var(--accent-rgb) / 0.16);
+    border-radius: 8px;
+    background: rgb(var(--accent-rgb) / 0.08);
+    color: var(--muted);
+    font-size: 0.84rem;
+    font-weight: 800;
 }
 
 .skill-group {
