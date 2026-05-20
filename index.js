@@ -3,9 +3,15 @@ const languageNames = {
     es: "Espanol",
 };
 
+const assetBase = document.body.dataset.assetBase || "./assets/";
+const languageUrls = {
+    us: document.body.dataset.usUrl || "./",
+    es: document.body.dataset.esUrl || "./es/",
+};
+
 const profileThemes = {
     es: {
-        image: "./assets/profile-es.webp",
+        image: `${assetBase}profile-es.webp`,
         width: 298,
         height: 600,
         accent: "#0f7f70",
@@ -13,7 +19,7 @@ const profileThemes = {
         strong: "#e0523f",
     },
     us: {
-        image: "./assets/profile-us.webp",
+        image: `${assetBase}profile-us.webp`,
         width: 298,
         height: 600,
         accent: "#275ca8",
@@ -228,7 +234,8 @@ const content = {
 };
 
 const supportedLanguages = Object.keys(content);
-const defaultLanguage = "us";
+const pageLanguage = document.body.dataset.locale || "us";
+const defaultLanguage = supportedLanguages.includes(pageLanguage) ? pageLanguage : "us";
 const languageStorageKey = "cv-language-v2";
 const documentLanguages = {
     es: "es",
@@ -346,6 +353,12 @@ function setLanguage(language) {
         const isActive = button.dataset.language === nextLanguage;
 
         button.setAttribute("aria-pressed", String(isActive));
+
+        if (isActive) {
+            button.setAttribute("aria-current", "page");
+        } else {
+            button.removeAttribute("aria-current");
+        }
     });
 
     try {
@@ -356,17 +369,6 @@ function setLanguage(language) {
 }
 
 function getInitialLanguage() {
-    try {
-        const savedLanguage = window.localStorage.getItem(languageStorageKey);
-
-        if (savedLanguage) {
-            const normalizedSavedLanguage = normalizeLanguage(savedLanguage);
-            return normalizedSavedLanguage;
-        }
-    } catch {
-        // Ignore storage errors and use the browser language.
-    }
-
     return defaultLanguage;
 }
 
@@ -374,7 +376,32 @@ languageButtons.forEach((button) => {
     const language = button.dataset.language;
 
     button.setAttribute("aria-label", languageNames[language]);
-    button.addEventListener("click", () => setLanguage(language));
+    button.addEventListener("click", (event) => {
+        const nextLanguage = normalizeLanguage(language);
+
+        try {
+            window.localStorage.setItem(languageStorageKey, nextLanguage);
+        } catch {
+            // The language links still work when storage is blocked.
+        }
+
+        if (nextLanguage === defaultLanguage) {
+            event.preventDefault();
+            setLanguage(nextLanguage);
+            return;
+        }
+
+        if (languageUrls[nextLanguage]) {
+            event.preventDefault();
+
+            const destination = new URL(languageUrls[nextLanguage], window.location.href);
+            destination.hash = window.location.hash;
+            window.location.href = destination.href;
+            return;
+        }
+
+        setLanguage(nextLanguage);
+    });
 });
 
 const revealItems = document.querySelectorAll(".reveal");
