@@ -5,10 +5,10 @@ Static CV landing page for a professional, dynamic, bilingual personal profile. 
 ## Features
 
 - Responsive CV landing layout with profile, experience, skills, about, and contact sections.
-- Language switcher for US English (`US`) and Spanish (`ES`), with `US` selected by default.
-- Dynamic WebP profile portrait changes per language through files in `assets/`.
-- Local language preference stored in `localStorage`.
-- Lightweight reveal animations with reduced-motion support.
+- Separate static pages for US English (`/`) and Spanish (`/es/`).
+- Language switcher links between the static language pages.
+- Language-specific WebP profile portraits through files in `assets/`.
+- Lightweight interaction styles with reduced-motion support.
 - No framework, package manager, or build step required.
 
 ## Project Structure
@@ -44,11 +44,11 @@ Then visit `http://localhost:8000`.
 
 ## Customization
 
-- Edit copy and translations in `index.js` inside the `content` object.
-- Replace placeholder links in `index.html`, especially email, LinkedIn, and GitHub.
-- Replace the WebP portraits in `assets/` with real photos or generated images. Keep the same file names, or update `profileThemes` in `index.js`.
-- If the portrait dimensions change, update the matching `width` and `height` values in `profileThemes` so the browser does not upscale small images.
-- Adjust the visual theme per language in `profileThemes` and the matching CSS custom properties.
+- Edit English copy in `index.html` and Spanish copy in `es/index.html`.
+- Replace placeholder links in both HTML files, especially email, LinkedIn, and GitHub.
+- Replace the WebP portraits in `assets/` with real photos or generated images. Keep the same file names, or update the image paths in both HTML files.
+- If the portrait dimensions change, update the matching `width` and `height` values in both HTML files so the browser does not upscale small images.
+- Adjust the visual theme per language with the CSS custom properties for each `body[data-locale]`.
 
 ## Deployment
 

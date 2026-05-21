@@ -1,407 +1,46 @@
 const languageNames = {
     us: "US English",
-    es: "Espanol",
+    es: "Spanish",
 };
 
-const assetBase = document.body.dataset.assetBase || "./assets/";
+const pageLanguage = document.body.dataset.locale || "us";
 const languageUrls = {
     us: document.body.dataset.usUrl || "./",
     es: document.body.dataset.esUrl || "./es/",
 };
-
-const profileThemes = {
-    es: {
-        image: `${assetBase}profile-es.webp`,
-        width: 298,
-        height: 600,
-        accent: "#0f7f70",
-        accentRgb: "15 127 112",
-        strong: "#e0523f",
-    },
-    us: {
-        image: `${assetBase}profile-us.webp`,
-        width: 298,
-        height: 600,
-        accent: "#275ca8",
-        accentRgb: "39 92 168",
-        strong: "#cf3f49",
-    },
-};
-
-const content = {
-    es: {
-        metaTitle: "Pablo Garcia Ortega | Desarrollador de software",
-        metaDescription: "Pablo Garcia Ortega es software developer, founder y creador de producto web con foco en frontend, backend, automatizacion, Linux y Web3.",
-        brand: "Pablo Garcia Ortega",
-        navProfile: "Perfil",
-        navExperience: "Experiencia",
-        navSkills: "Skills",
-        navAbout: "Sobre mi",
-        navContact: "Contacto",
-        eyebrow: "Software Developer - Founder - Product builder",
-        heroName: "Pablo Garcia Ortega",
-        heroRole: "Desarrollador que lanza cosas simples y solidas",
-        heroSummary: "Convierto ideas en bruto en productos web utiles: frontend, backend, automatizacion y alguna vuelta blockchain, siempre por el camino simple que funciona.",
-        primaryAction: "Abrir conversacion",
-        secondaryAction: "Ver experiencia",
-        stat1Value: "5+ anos",
-        stat1Label: "Creando producto web",
-        stat2Value: "Full stack",
-        stat2Label: "Frontend, backend, Linux",
-        stat3Value: "Founder",
-        stat3Label: "Crypto domains + growth",
-        profileTitle: "Modo ES",
-        profileReference: "Simple primero, jugueton cuando suma, entregado sin drama.",
-        profileAlt: "Retrato de Pablo Garcia Ortega para la version espanola",
-        sectionProfileEyebrow: "Perfil",
-        sectionProfileTitle: "Autodidacta, inquieto y alergico al exceso.",
-        sectionProfileIntro: "Me gusta llevar ideas del papel a la realidad, con ambicion, curiosidad y una defensa firme de la solucion simple que resuelve.",
-        highlight1Title: "Ideas a producto",
-        highlight1Body: "Trazo caminos pequenos y probables desde un boceto, un problema o una senal rara.",
-        highlight2Title: "Simple por diseno",
-        highlight2Body: "Si dos soluciones sirven, elijo la que el equipo puede explicar, mantener y lanzar.",
-        highlight3Title: "Punto jugueton",
-        highlight3Body: "Me gustan los productos con caracter, mientras la interfaz siga clara y rapida.",
-        sectionExperienceEyebrow: "Experiencia",
-        sectionExperienceTitle: "De equipos de producto a experimentos founder.",
-        sectionExperienceIntro: "Software developer remoto en Inveert, mas proyectos founder en naming crypto y growth social.",
-        experience1Date: "Sep 2020 - Actualidad",
-        experience1Title: "Software Developer",
-        experience1Company: "Inveert | Smart Planning - Jornada completa - Remoto desde Sevilla",
-        experience1Body: "Construyo y evoluciono interfaces de producto, flujos Linux y funcionalidades software para herramientas de planificacion digital.",
-        experience1SkillA: "Frontend",
-        experience1SkillB: "Linux",
-        experience1SkillC: "UI producto",
-        experience1SkillD: "JavaScript",
-        experience2Date: "Jul 2019 - Actualidad",
-        experience2Title: "Founder & Software Developer",
-        experience2Company: "EasyCryptoName - Profesional independiente",
-        experience2Body: "Como founder, disenador y developer, cree un producto que acerca dominios crypto a personas sin base blockchain.",
-        experience2SkillA: "Solidity",
-        experience2SkillB: "Blockchain",
-        experience2SkillC: "Diseno producto",
-        experience2SkillD: "Web3",
-        experience3Date: "Ago 2019 - Mar 2020",
-        experience3Title: "Full Stack Developer",
-        experience3Company: "Scope Ink - Jornada completa - Sevilla",
-        experience3Body: "Trabaje entre frontend y backend para entregar features web, pulir flujos y apoyar un producto joven con ritmo.",
-        experience3SkillA: "JavaScript",
-        experience3SkillB: "Full stack",
-        experience3SkillC: "APIs",
-        experience3SkillD: "UI",
-        experience4Date: "Mar 2016 - Feb 2018",
-        experience4Title: "Founder & Software Developer",
-        experience4Company: "DoFollow.me - Profesional independiente - Espana",
-        experience4Body: "Cree una herramienta de suscripcion para Twitter que detectaba audiencias rivales y las convertia con mensajes privados.",
-        experience4SkillA: "Python",
-        experience4SkillB: "JavaScript",
-        experience4SkillC: "Automatizacion",
-        experience4SkillD: "Growth",
-        sectionSkillsEyebrow: "Skills",
-        sectionSkillsTitle: "Skills de software con criterio producto.",
-        sectionSkillsIntro: "El stack es practico: crear interfaces fiables, conectar servicios utiles y mantener el sistema facil de razonar.",
-        skill1Title: "Frontend fino",
-        skill1A: "HTML semantico",
-        skill1B: "CSS responsive",
-        skill1C: "JavaScript modular",
-        skill1D: "UI accesible",
-        skill2Title: "Backend y sistemas",
-        skill2A: "Python",
-        skill2B: "APIs",
-        skill2C: "Linux",
-        skill2D: "Flujos de datos",
-        skill3Title: "Producto y Web3",
-        skill3A: "Prototipado rapido",
-        skill3B: "Solidity",
-        skill3C: "Blockchain",
-        skill3D: "Automatizacion util",
-        sectionAboutEyebrow: "Sobre mi",
-        sectionAboutTitle: "Curiosidad primero, software desde entonces.",
-        sectionAboutIntro: "La tecnologia me fascina desde pequeno, cuando empece a montar mis propios PCs gaming y a romper lo justo para entender como funcionaban.",
-        aboutStart: "Desde 2009",
-        aboutTitle: "Builder de punta a punta",
-        aboutBodyA: "Empece a desarrollar software en 2009 con pequenas automatizaciones y bots de web scraping. Esa curiosidad inicial se convirtio en una costumbre: entender el sistema, automatizar lo repetitivo y convertir ideas en herramientas que funcionan.",
-        aboutBodyB: "Desde entonces he trabajado con empresas y startups en backend, frontend, interfaces de producto, redes y sistemas operativos. Disfruto el ciclo completo del software, desde dar forma a la idea hasta mantenerla funcionando.",
-        sectionContactEyebrow: "Contacto",
-        sectionContactTitle: "Abierto a equipos que valoran software simple.",
-        sectionContactIntro: "Encaje natural: equipos de producto, herramientas founder y plataformas web donde ejecutar claro importa mas que la ceremonia.",
-        emailAction: "Enviar email",
-        linkedinAction: "LinkedIn",
-        githubAction: "GitHub",
-        footerText: "Pablo Garcia Ortega - CV landing bilingue para un software developer que prefiere sistemas simples con personalidad.",
-    },
-    us: {
-        metaTitle: "Pablo Garcia Ortega | Software Developer",
-        metaDescription: "Pablo Garcia Ortega is a software developer, founder, and product-minded builder focused on frontend, backend, automation, Linux, and Web3.",
-        brand: "Pablo Garcia Ortega",
-        navProfile: "Profile",
-        navExperience: "Experience",
-        navSkills: "Skills",
-        navAbout: "About",
-        navContact: "Contact",
-        eyebrow: "Software Developer - Founder - Product builder",
-        heroName: "Pablo Garcia Ortega",
-        heroRole: "Software developer who ships simple things well",
-        heroSummary: "I turn rough ideas into useful web products: frontend, backend, automation and the occasional blockchain detour, always choosing the simplest path that works.",
-        primaryAction: "Start a conversation",
-        secondaryAction: "View experience",
-        stat1Value: "5+ years",
-        stat1Label: "Building web products",
-        stat2Value: "Full stack",
-        stat2Label: "Frontend, backend, Linux",
-        stat3Value: "Founder",
-        stat3Label: "Crypto domains + growth",
-        profileTitle: "US mode",
-        profileReference: "Simple first, playful when useful, shipped without drama.",
-        profileAlt: "Portrait of Pablo Garcia Ortega for the US version",
-        sectionProfileEyebrow: "Profile",
-        sectionProfileTitle: "Autodidact, restless, allergic to excess.",
-        sectionProfileIntro: "I like moving ideas from paper to reality, with ambition, curiosity and a firm bias for the simplest solution that solves.",
-        highlight1Title: "Ideas to product",
-        highlight1Body: "I shape small, testable paths from a sketch, a user problem or a strange market signal.",
-        highlight2Title: "Simple by design",
-        highlight2Body: "When two solutions work, I choose the one the team can explain, maintain and ship.",
-        highlight3Title: "Playful edge",
-        highlight3Body: "I enjoy products with personality, as long as the interface stays clear and fast.",
-        sectionExperienceEyebrow: "Experience",
-        sectionExperienceTitle: "From product teams to founder experiments.",
-        sectionExperienceIntro: "Remote software developer at Inveert, plus founder work in crypto naming and social growth tools.",
-        experience1Date: "Sep 2020 - Present",
-        experience1Title: "Software Developer",
-        experience1Company: "Inveert | Smart Planning - Full-time - Remote from Seville",
-        experience1Body: "I build and evolve product interfaces, Linux-friendly workflows and software features for planning tools used by digital teams.",
-        experience1SkillA: "Frontend",
-        experience1SkillB: "Linux",
-        experience1SkillC: "Product UI",
-        experience1SkillD: "JavaScript",
-        experience2Date: "Jul 2019 - Present",
-        experience2Title: "Founder & Software Developer",
-        experience2Company: "EasyCryptoName - Independent",
-        experience2Body: "As founder, designer and developer, I built a product that makes crypto domains understandable for people without blockchain background.",
-        experience2SkillA: "Solidity",
-        experience2SkillB: "Blockchain",
-        experience2SkillC: "Product design",
-        experience2SkillD: "Web3",
-        experience3Date: "Aug 2019 - Mar 2020",
-        experience3Title: "Full Stack Developer",
-        experience3Company: "Scope Ink - Full-time - Seville",
-        experience3Body: "I worked across frontend and backend to deliver web features, polish flows and support a young product moving fast.",
-        experience3SkillA: "JavaScript",
-        experience3SkillB: "Full stack",
-        experience3SkillC: "APIs",
-        experience3SkillD: "UI",
-        experience4Date: "Mar 2016 - Feb 2018",
-        experience4Title: "Founder & Software Developer",
-        experience4Company: "DoFollow.me - Independent - Spain",
-        experience4Body: "I created a Twitter marketing subscription tool to discover competitor audiences and convert them through targeted private messages.",
-        experience4SkillA: "Python",
-        experience4SkillB: "JavaScript",
-        experience4SkillC: "Automation",
-        experience4SkillD: "Growth",
-        sectionSkillsEyebrow: "Skills",
-        sectionSkillsTitle: "Software skills with product taste.",
-        sectionSkillsIntro: "The stack is practical: build reliable interfaces, wire useful services and keep the system easy to reason about.",
-        skill1Title: "Frontend craft",
-        skill1A: "Semantic HTML",
-        skill1B: "Responsive CSS",
-        skill1C: "Modular JavaScript",
-        skill1D: "Accessible UI",
-        skill2Title: "Backend & systems",
-        skill2A: "Python",
-        skill2B: "APIs",
-        skill2C: "Linux",
-        skill2D: "Data flows",
-        skill3Title: "Product & Web3",
-        skill3A: "Fast prototyping",
-        skill3B: "Solidity",
-        skill3C: "Blockchain",
-        skill3D: "Useful automation",
-        sectionAboutEyebrow: "About me",
-        sectionAboutTitle: "Curiosity first, software ever since.",
-        sectionAboutIntro: "I have been close to technology since childhood, when I began building my own gaming PCs and breaking things just enough to understand them.",
-        aboutStart: "Since 2009",
-        aboutTitle: "Builder across the stack",
-        aboutBodyA: "I started developing software in 2009 with small automation and web scraping bots. That early curiosity became a long-running habit: understand the system, automate the boring parts and turn rough ideas into working tools.",
-        aboutBodyB: "Since then, I have worked with companies and startups across backend, frontend, product interfaces, networks and operating systems. I enjoy the full software loop, from shaping the idea to keeping the thing running.",
-        sectionContactEyebrow: "Contact",
-        sectionContactTitle: "Open to teams that value simple software.",
-        sectionContactIntro: "Best fit: product teams, founder-led tools and web platforms where clear execution matters more than ceremony.",
-        emailAction: "Email me",
-        linkedinAction: "LinkedIn",
-        githubAction: "GitHub",
-        footerText: "Pablo Garcia Ortega - bilingual CV landing for a software developer who prefers simple systems with personality.",
-    },
-};
-
-const supportedLanguages = Object.keys(content);
-const pageLanguage = document.body.dataset.locale || "us";
-const defaultLanguage = supportedLanguages.includes(pageLanguage) ? pageLanguage : "us";
-const languageStorageKey = "cv-language-v2";
-const documentLanguages = {
-    es: "es",
-    us: "en-US",
-};
-const translatableNodes = document.querySelectorAll("[data-i18n]");
 const languageButtons = document.querySelectorAll("[data-language]");
-const profileFrame = document.querySelector(".portrait-frame");
-const profileImage = document.querySelector("#profileImage");
-const profileImageNext = document.querySelector("#profileImageNext");
-const metaDescription = document.querySelector("meta[name='description']");
-const openGraphTitle = document.querySelector("meta[property='og:title']");
-const openGraphDescription = document.querySelector("meta[property='og:description']");
-const twitterTitle = document.querySelector("meta[name='twitter:title']");
-const twitterDescription = document.querySelector("meta[name='twitter:description']");
-const profileSwapDuration = 0;
-let profileSwapTimer;
-let profileSwapId = 0;
-
-function applyTheme(language) {
-    const theme = profileThemes[language];
-
-    document.body.dataset.locale = language;
-    document.body.style.setProperty("--accent", theme.accent);
-    document.body.style.setProperty("--accent-rgb", theme.accentRgb);
-    document.body.style.setProperty("--accent-strong", theme.strong);
-}
-
-function swapProfileImage(language, dictionary) {
-    const theme = profileThemes[language];
-    const currentImage = profileImage.getAttribute("src");
-
-    profileSwapId += 1;
-    window.clearTimeout(profileSwapTimer);
-    profileFrame.classList.remove("is-swapping");
-
-    if (currentImage === theme.image) {
-        profileImage.alt = dictionary.profileAlt;
-        profileImage.width = theme.width;
-        profileImage.height = theme.height;
-        profileImageNext.src = theme.image;
-        profileImageNext.width = theme.width;
-        profileImageNext.height = theme.height;
-        return;
-    }
-
-    const swapId = profileSwapId;
-
-    profileImageNext.src = theme.image;
-    profileImageNext.width = theme.width;
-    profileImageNext.height = theme.height;
-
-    const completeSwap = () => {
-        if (swapId !== profileSwapId) {
-            return;
-        }
-
-        profileImage.src = theme.image;
-        profileImage.alt = dictionary.profileAlt;
-        profileImage.width = theme.width;
-        profileImage.height = theme.height;
-        profileFrame.classList.remove("is-swapping");
-    };
-
-    const startSwap = () => {
-        if (swapId !== profileSwapId) {
-            return;
-        }
-
-        profileFrame.classList.remove("is-swapping");
-        void profileFrame.offsetWidth;
-        profileFrame.classList.add("is-swapping");
-        profileSwapTimer = window.setTimeout(completeSwap, profileSwapDuration);
-    };
-
-    if (profileImageNext.complete) {
-        startSwap();
-    } else {
-        profileImageNext.addEventListener("load", startSwap, { once: true });
-    }
-}
 
 function normalizeLanguage(language) {
     if (language === "en") {
         return "us";
     }
 
-    return supportedLanguages.includes(language) ? language : defaultLanguage;
-}
-
-function setLanguage(language) {
-    const nextLanguage = normalizeLanguage(language);
-    const dictionary = content[nextLanguage];
-
-    document.documentElement.lang = documentLanguages[nextLanguage];
-    document.title = dictionary.metaTitle;
-    metaDescription.setAttribute("content", dictionary.metaDescription);
-    openGraphTitle.setAttribute("content", dictionary.metaTitle);
-    openGraphDescription.setAttribute("content", dictionary.metaDescription);
-    twitterTitle.setAttribute("content", dictionary.metaTitle);
-    twitterDescription.setAttribute("content", dictionary.metaDescription);
-
-    translatableNodes.forEach((node) => {
-        const key = node.dataset.i18n;
-
-        if (dictionary[key]) {
-            node.textContent = dictionary[key];
-        }
-    });
-
-    applyTheme(nextLanguage);
-    swapProfileImage(nextLanguage, dictionary);
-
-    languageButtons.forEach((button) => {
-        const isActive = button.dataset.language === nextLanguage;
-
-        button.setAttribute("aria-pressed", String(isActive));
-
-        if (isActive) {
-            button.setAttribute("aria-current", "page");
-        } else {
-            button.removeAttribute("aria-current");
-        }
-    });
-
-    try {
-        window.localStorage.setItem(languageStorageKey, nextLanguage);
-    } catch {
-        // The page still works when storage is blocked.
-    }
-}
-
-function getInitialLanguage() {
-    return defaultLanguage;
+    return Object.prototype.hasOwnProperty.call(languageUrls, language) ? language : pageLanguage;
 }
 
 languageButtons.forEach((button) => {
-    const language = button.dataset.language;
+    const language = normalizeLanguage(button.dataset.language);
+    const isActive = language === pageLanguage;
 
-    button.setAttribute("aria-label", languageNames[language]);
+    button.setAttribute("aria-label", languageNames[language] || button.textContent.trim());
+    button.setAttribute("aria-pressed", String(isActive));
+
+    if (isActive) {
+        button.setAttribute("aria-current", "page");
+    } else {
+        button.removeAttribute("aria-current");
+    }
+
     button.addEventListener("click", (event) => {
-        const nextLanguage = normalizeLanguage(language);
-
-        try {
-            window.localStorage.setItem(languageStorageKey, nextLanguage);
-        } catch {
-            // The language links still work when storage is blocked.
-        }
-
-        if (nextLanguage === defaultLanguage) {
+        if (isActive) {
             event.preventDefault();
-            setLanguage(nextLanguage);
             return;
         }
 
-        if (languageUrls[nextLanguage]) {
-            event.preventDefault();
+        const destination = new URL(languageUrls[language], window.location.href);
+        destination.hash = window.location.hash;
 
-            const destination = new URL(languageUrls[nextLanguage], window.location.href);
-            destination.hash = window.location.hash;
-            window.location.href = destination.href;
-            return;
-        }
-
-        setLanguage(nextLanguage);
+        event.preventDefault();
+        window.location.href = destination.href;
     });
 });
-
-setLanguage(getInitialLanguage());
