@@ -30,7 +30,7 @@ const profileThemes = {
 
 const content = {
     es: {
-        metaTitle: "Pablo Garcia Ortega | Software Developer",
+        metaTitle: "Pablo Garcia Ortega | Desarrollador de software",
         metaDescription: "Pablo Garcia Ortega es software developer, founder y creador de producto web con foco en frontend, backend, automatizacion, Linux y Web3.",
         brand: "Pablo Garcia Ortega",
         navProfile: "Perfil",

@@ -20,9 +20,14 @@ Static CV landing page for a professional, dynamic, bilingual personal profile. 
 ├── assets/
 │   ├── profile-es.webp
 │   └── profile-us.webp
+├── es/
+│   └── index.html
+├── CNAME
 ├── index.css
 ├── index.html
-└── index.js
+├── index.js
+├── robots.txt
+└── sitemap.xml
 ```
 
 ## Run Locally
@@ -48,3 +53,10 @@ Then visit `http://localhost:8000`.
 ## Deployment
 
 This project is static. Deploy the folder to GitHub Pages, Netlify, Vercel, Cloudflare Pages, or any static hosting provider.
+
+For GitHub Pages with the custom domain `pablogarciaortega.com`, keep the root-level `CNAME` file committed. The canonical public URLs are:
+
+- `https://pablogarciaortega.com/` for the US English version.
+- `https://pablogarciaortega.com/es/` for the Spanish version.
+
+After publishing, submit `https://pablogarciaortega.com/sitemap.xml` in Google Search Console.
