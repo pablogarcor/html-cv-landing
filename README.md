@@ -4,7 +4,7 @@ Static CV landing page for a professional, dynamic, bilingual personal profile. 
 
 ## Features
 
-- Responsive CV landing layout with profile, experience, skills, and contact sections.
+- Responsive CV landing layout with profile, experience, skills, about, and contact sections.
 - Language switcher for US English (`US`) and Spanish (`ES`), with `US` selected by default.
 - Dynamic WebP profile portrait changes per language through files in `assets/`.
 - Local language preference stored in `localStorage`.

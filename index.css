@@ -212,6 +212,7 @@ h3 {
 .section-heading p,
 .feature-card p,
 .timeline-item p,
+.about-card p,
 .skill-group li,
 .contact-panel p,
 .site-footer {
@@ -400,6 +401,7 @@ h3 {
 
 .feature-card,
 .timeline-item,
+.about-card,
 .skill-group,
 .contact-panel {
     border: 1px solid rgb(23 32 42 / 0.11);
@@ -442,6 +444,18 @@ h3 {
     gap: 20px;
     align-items: start;
     padding: 22px;
+}
+
+.about-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    align-items: start;
+    padding: 22px;
+}
+
+.about-card p:last-child {
+    margin-bottom: 0;
 }
 
 .timeline-date {
@@ -657,7 +671,8 @@ h3 {
         min-height: 82px;
     }
 
-    .timeline-item {
+    .timeline-item,
+    .about-card {
         grid-template-columns: 1fr;
         gap: 8px;
     }
