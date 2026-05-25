@@ -9,6 +9,8 @@ const languageUrls = {
     es: document.body.dataset.esUrl || "./es/",
 };
 const languageButtons = document.querySelectorAll("[data-language]");
+const contactEmailAddress = "pablo@pablogarcor.com";
+const contactEmailLinks = document.querySelectorAll("[data-email-link]");
 
 function normalizeLanguage(language) {
     if (language === "en") {
@@ -43,4 +45,8 @@ languageButtons.forEach((button) => {
         event.preventDefault();
         window.location.href = destination.href;
     });
+});
+
+contactEmailLinks.forEach((link) => {
+    link.href = `mailto:${contactEmailAddress}`;
 });
