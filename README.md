@@ -40,23 +40,26 @@ Optional local server:
 python3 -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`.
+Then visit `http://localhost:8000` (English) and `http://localhost:8000/es/` (Spanish).
+
+There are no tests, linters or CI. The manual checks before opening a pull request are in `AGENTS.md`.
 
 ## Customization
 
 - Edit English copy in `index.html` and Spanish copy in `es/index.html`.
-- Replace placeholder links in both HTML files, especially email, LinkedIn, and GitHub.
+- The contact email is set once in `index.js` (`contactEmailAddress`); links with `data-email-link` are filled in at load time.
+- Keep both pages in sync: the same section `id`s, `hreflang` links and JSON-LD `Person`. See `AGENTS.md`.
 - Replace the WebP portraits in `assets/` with real photos or generated images. Keep the same file names, or update the image paths in both HTML files.
 - If the portrait dimensions change, update the matching `width` and `height` values in both HTML files so the browser does not upscale small images.
 - Adjust the visual theme per language with the CSS custom properties for each `body[data-locale]`.
 
 ## Deployment
 
-This project is static. Deploy the folder to GitHub Pages, Netlify, Vercel, Cloudflare Pages, or any static hosting provider.
+This project is static and can be hosted on any static hosting provider. It is published with GitHub Pages from the `main` branch (root folder, no workflows): every merge to `main` is deployed. `main` is protected, so all changes go through a pull request.
 
 For GitHub Pages with the custom domain `pablogarciaortega.com`, keep the root-level `CNAME` file committed. The canonical public URLs are:
 
 - `https://pablogarciaortega.com/` for the US English version.
 - `https://pablogarciaortega.com/es/` for the Spanish version.
 
-After publishing, submit `https://pablogarciaortega.com/sitemap.xml` in Google Search Console.
+`sitemap.xml` is maintained by hand: update its `lastmod` dates when the content changes. It is submitted in Google Search Console.
