@@ -51,7 +51,9 @@ tres primeros deben salir con código 0.
 
 ```sh
 fail=0
-for p in / /es/ /index.css /index.js /assets/profile-us.webp /assets/profile-es.webp /sitemap.xml /robots.txt /CNAME; do
+for p in / /es/ /index.css /index.js /assets/profile-us.webp /assets/profile-es.webp \
+         /favicon.ico /assets/favicon.svg /assets/favicon-96.png /assets/apple-touch-icon.png \
+         /assets/share-us.jpg /assets/share-es.jpg /sitemap.xml /robots.txt /CNAME; do
   code=$(curl -s -o /dev/null -w '%{http_code}' "http://127.0.0.1:8000$p")
   echo "$code $p"; [ "$code" = 200 ] || fail=1
 done
@@ -204,8 +206,21 @@ JavaScript. Todo cambio de texto se hace **en las dos**:
 - **Correo de contacto:** está en `index.js` (`contactEmailAddress`), no en el
   HTML. Los enlaces con `data-email-link` se rellenan solos.
 - **Retratos:** sustituye el WebP con el mismo nombre o cambia la ruta en el
-  `<img>`, `og:image`, `twitter:image` y JSON-LD `image` de esa página. Si
-  cambian las dimensiones, actualiza `width` y `height` del `<img>`.
+  `<img>` y en el JSON-LD `image` de esa página. Si cambian las dimensiones,
+  actualiza `width` y `height` del `<img>`. La imagen para compartir lleva el
+  retrato dentro: si cambia, rehazla (siguiente punto).
+- **Imagen para compartir:** `assets/share-us.jpg` y `assets/share-es.jpg`,
+  JPG de 1200×630 y menos de 300 KB, en `og:image` y `twitter:image` de cada
+  página, con `og:image:width`, `og:image:height`, `og:image:alt` y
+  `twitter:image:alt` en el idioma de la página. Repiten textos del CV (puesto,
+  nombre, lema y dominio): si cambian, hay que rehacerlas y cambiar el `alt`.
+  Se generan fuera del repo con el Chrome sin interfaz (captura en JPEG de un
+  HTML de 1200×630); no se añade ningún paso de build.
+- **Iconos:** `assets/favicon.svg` (la marca "P" de la cabecera) es el
+  original; `favicon.ico` (16, 32 y 48 px, en la raíz), `assets/favicon-96.png`
+  y `assets/apple-touch-icon.png` (180×180, sin transparencia) se generan a
+  partir de él con el mismo Chrome. Los cuatro se declaran en el `<head>` de
+  las dos páginas.
 - **Colores:** propiedades CSS de `:root` en `index.css`; el español las
   sobrescribe en `body[data-locale="es"]`.
 
