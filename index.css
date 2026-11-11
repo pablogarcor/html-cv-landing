@@ -520,8 +520,32 @@ h3 {
 
 .contact-panel .overline,
 .contact-panel h2,
-.contact-panel p {
+.contact-panel p,
+.profile-links {
     grid-column: 1 / 2;
+}
+
+.profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.profile-links a {
+    color: var(--accent);
+    font-weight: 750;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.profile-links a:hover,
+.profile-links a:focus-visible {
+    color: var(--ink);
+    text-decoration-thickness: 2px;
 }
 
 .contact-panel p {
@@ -531,7 +555,7 @@ h3 {
 
 .contact-actions {
     grid-column: 2 / 3;
-    grid-row: 1 / 4;
+    grid-row: 1 / 5;
     justify-content: flex-end;
 }
 
