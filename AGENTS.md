@@ -112,8 +112,11 @@ for path, (lang, locale, url) in PAGES.items():
     if len(set(p.ids)) != len(p.ids): errors.append(f"{path}: hay id repetidos")
     try:
         ld = json.loads("".join(p.ld))
-        if (ld.get("@id"), ld.get("url")) != (SITE + "/#person", SITE + "/"):
-            errors.append(f"{path}: JSON-LD @id={ld.get('@id')} url={ld.get('url')}")
+        if (ld.get("@type"), ld.get("url"), ld.get("inLanguage")) != ("ProfilePage", url, lang):
+            errors.append(f"{path}: JSON-LD @type={ld.get('@type')} url={ld.get('url')} inLanguage={ld.get('inLanguage')}")
+        person = ld.get("mainEntity") or {}
+        if (person.get("@type"), person.get("@id"), person.get("url")) != ("Person", SITE + "/#person", SITE + "/"):
+            errors.append(f"{path}: JSON-LD mainEntity @type={person.get('@type')} @id={person.get('@id')} url={person.get('url')}")
     except ValueError as e:
         errors.append(f"{path}: JSON-LD no válido: {e}")
     for r in p.refs:
@@ -216,10 +219,13 @@ El paso 2 de *Comprobar los cambios* verifica casi todo esto:
 - Los mismos `hreflang` en las dos páginas y en el sitemap: `en` → `/`,
   `es` → `/es/`, `x-default` → `/`.
 - `canonical` y `og:url` de cada página apuntan a su propia URL.
-- JSON-LD: un solo `Person` con el mismo `@id` (`/#person`) y la misma `url`
-  (`/`) en las dos páginas. Cambian el idioma de `jobTitle` y `description` y
-  la `image` (el retrato de cada idioma).
-- Los mismos datos en las dos (nombre, enlaces de `sameAs`, ubicación), aunque
+- JSON-LD: un `ProfilePage` por página, con la `url` y el `inLanguage` de esa
+  página (`en-US` o `es`), cuyo `mainEntity` es un solo `Person` con el mismo
+  `@id` (`/#person`) y la misma `url` (`/`) en las dos páginas. Cambian el
+  `name` del `ProfilePage` (el `<title>`), el idioma de `jobTitle` y
+  `description` y la `image` (el retrato de cada idioma).
+- Los mismos datos en las dos (nombre, `givenName` y `familyName`, `worksFor`,
+  `knowsLanguage`, enlaces de `sameAs`, ubicación), aunque
   el texto esté traducido.
 - Si añades una página nueva, va en el `sitemap.xml` con sus `hreflang`, y
   enlazada desde las páginas existentes.
