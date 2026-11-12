@@ -1,8 +1,3 @@
-const languageNames = {
-    us: "US English",
-    es: "Spanish",
-};
-
 const pageLanguage = document.body.dataset.locale || "us";
 const languageUrls = {
     us: document.body.dataset.usUrl || "./",
@@ -23,9 +18,6 @@ function normalizeLanguage(language) {
 languageButtons.forEach((button) => {
     const language = normalizeLanguage(button.dataset.language);
     const isActive = language === pageLanguage;
-
-    button.setAttribute("aria-label", languageNames[language] || button.textContent.trim());
-    button.setAttribute("aria-pressed", String(isActive));
 
     if (isActive) {
         button.setAttribute("aria-current", "page");

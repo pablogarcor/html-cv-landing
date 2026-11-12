@@ -154,13 +154,14 @@ export LD_LIBRARY_PATH=$T/chrome-libs-deb13/root/usr/lib/x86_64-linux-gnu FONTCO
 for p in / /es/; do
   echo "== $p"
   "$CHROME" --no-sandbox --disable-gpu --dump-dom "http://127.0.0.1:8000$p" 2>/dev/null \
-    | grep -o 'href="mailto:[^"]*"\|data-language="[a-z]*"[^>]*aria-pressed="[a-z]*"'
+    | grep -o 'href="mailto:[^"]*"\|data-language="[a-z]*"[^>]*>'
 done
 ```
 
 Debe salir, en cada página, un `href="mailto:…"` (lo rellena `index.js`) y
-los dos botones de idioma con `aria-pressed="true"` solo en el de la página:
-`us` en `/` y `es` en `/es/`.
+los dos enlaces de idioma, con `aria-label` en el idioma de la página y
+`aria-current="page"` solo en el de la página: `us` en `/` y `es` en `/es/`.
+Ninguno lleva `aria-pressed` (es un atributo de botones, y son enlaces).
 
 ### 4. Mirar cómo queda
 
