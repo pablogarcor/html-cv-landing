@@ -11,6 +11,8 @@ https://pablogarciaortega.com (inglés en `/`, español en `/es/`).
 - `index.html` (inglés, `/`), `es/index.html` (español, `/es/`), `index.css` e
   `index.js` compartidos, retratos en `assets/`, `sitemap.xml`, `robots.txt` y
   `CNAME`.
+- `404.html`: la página de error, en los dos idiomas a la vez, que GitHub Pages
+  sirve en cualquier ruta que no existe (ver *Página 404*).
 - **No hay tests ni lint.** No existe `npm test`, ni linter, ni formateador, ni
   CI. Las comprobaciones de este archivo son lo único que hay.
 - No añadas dependencias, `package.json`, archivos de configuración de
@@ -53,7 +55,8 @@ tres primeros deben salir con código 0.
 fail=0
 for p in / /es/ /index.css /index.js /assets/profile-us.webp /assets/profile-es.webp \
          /favicon.ico /assets/favicon.svg /assets/favicon-96.png /assets/apple-touch-icon.png \
-         /assets/share-us.jpg /assets/share-es.jpg /sitemap.xml /robots.txt /CNAME; do
+         /assets/share-us.jpg /assets/share-es.jpg /sitemap.xml /robots.txt /CNAME \
+         /404.html /assets/vincent-404.mp4 /assets/vincent-404.webm /assets/vincent-404-poster.webp; do
   code=$(curl -s -o /dev/null -w '%{http_code}' "http://127.0.0.1:8000$p")
   echo "$code $p"; [ "$code" = 200 ] || fail=1
 done
@@ -225,6 +228,50 @@ JavaScript. Todo cambio de texto se hace **en las dos**:
 - **Colores:** propiedades CSS de `:root` en `index.css`; el español las
   sobrescribe en `body[data-locale="es"]`.
 
+### Página 404
+
+- `404.html` va en la raíz y GitHub Pages la sirve, con código 404, en
+  cualquier ruta que no existe (también dentro de `/es/`). Por eso todas sus
+  rutas son absolutas (`/index.css`, `/assets/…`).
+- Lleva el texto en inglés y en español en la misma página, enlaces a `/` y a
+  `/es/` y `<meta name="robots" content="noindex">`. No va en el sitemap ni
+  lleva `canonical` ni `hreflang`. Sus estilos son el bloque `.not-found` de
+  `index.css`.
+- El vídeo de Vincent (`assets/vincent-404.webm`, `.mp4` y el póster
+  `vincent-404-poster.webp`, 480×270) es decorativo (`aria-hidden`). Con
+  `prefers-reduced-motion: reduce` no se reproduce y solo se ve el póster.
+  Salieron del GIF original (fuera del repo) con ffmpeg, que no es una
+  dependencia del sitio:
+
+```sh
+F=/srv/repos/.tools/ffmpeg-7.0.2/ffmpeg   # ffmpeg estático, fuera del repo
+G=vincent-404.gif                          # el GIF original
+$F -i $G -an -c:v libx264 -preset veryslow -crf 26 -pix_fmt yuv420p -profile:v high -movflags +faststart -map_metadata -1 assets/vincent-404.mp4
+$F -i $G -an -c:v libvpx-vp9 -b:v 0 -crf 36 -row-mt 1 -deadline good -cpu-used 1 -pix_fmt yuv420p -map_metadata -1 assets/vincent-404.webm
+$F -i $G -frames:v 1 -c:v libwebp -quality 80 -map_metadata -1 assets/vincent-404-poster.webp
+```
+
+- `python3 -m http.server` no sirve `404.html` en las rutas que no existen
+  (da su propio 404). Para probarla como en Pages, sirve el repo en otro
+  puerto con este servidor, que solo cambia eso, y abre una ruta que no existe:
+
+```sh
+python3 -I - 8001 <<'PY' 2>/dev/null &
+import http.server, sys
+class H(http.server.SimpleHTTPRequestHandler):
+    def send_error(self, code, message=None, explain=None):
+        if code != 404: return super().send_error(code, message, explain)
+        body = open("404.html", "rb").read()
+        self.send_response(404); self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body))); self.end_headers()
+        if self.command != "HEAD": self.wfile.write(body)
+http.server.ThreadingHTTPServer(("127.0.0.1", int(sys.argv[1])), H).serve_forever()
+PY
+SERVER404_PID=$!; sleep 1
+curl -s -w '\n%{http_code}\n' http://127.0.0.1:8001/es/noexiste | grep -c 'not-found\|^404$'   # 2 o más
+kill "$SERVER404_PID"
+```
+
 ### Qué debe quedar igual entre `/`, `/es/` y el sitemap
 
 El paso 2 de *Comprobar los cambios* verifica casi todo esto:
@@ -257,6 +304,8 @@ El paso 2 de *Comprobar los cambios* verifica casi todo esto:
   merge: las PR las revisa y fusiona Pablo.
 - No toques `CNAME` (dominio `pablogarciaortega.com`, sin `www`) ni
   `robots.txt` salvo que la tarea lo pida.
+- `robots.txt` permite todo salvo los `.md` (`Disallow: /*.md`): Pages publica
+  `README.md` y `AGENTS.md`, pero no son parte del CV y no deben rastrearse.
 - No hay `.nojekyll`: Pages pasa el sitio por Jekyll. No crees archivos ni
   carpetas que empiecen por `_` sin añadir antes un `.nojekyll` (y proponlo en
   la tarea).

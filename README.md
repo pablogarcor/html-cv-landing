@@ -9,6 +9,7 @@ Static CV landing page for a professional, dynamic, bilingual personal profile. 
 - Language switcher links between the static language pages.
 - Language-specific WebP profile portraits through files in `assets/`.
 - Favicon (SVG, ICO, PNG and Apple touch icon) and a 1200×630 share image per language for link previews.
+- Bilingual `404.html` page (served by GitHub Pages for any missing URL) with links back to both CV pages.
 - Lightweight interaction styles with reduced-motion support.
 - No framework, package manager, or build step required.
 
@@ -16,6 +17,7 @@ Static CV landing page for a professional, dynamic, bilingual personal profile. 
 
 ```text
 .
+├── 404.html
 ├── AGENTS.md
 ├── README.md
 ├── assets/
@@ -25,7 +27,10 @@ Static CV landing page for a professional, dynamic, bilingual personal profile. 
 │   ├── profile-es.webp
 │   ├── profile-us.webp
 │   ├── share-es.jpg
-│   └── share-us.jpg
+│   ├── share-us.jpg
+│   ├── vincent-404-poster.webp
+│   ├── vincent-404.mp4
+│   └── vincent-404.webm
 ├── es/
 │   └── index.html
 ├── CNAME
@@ -69,5 +74,7 @@ For GitHub Pages with the custom domain `pablogarciaortega.com`, keep the root-l
 
 - `https://pablogarciaortega.com/` for the US English version.
 - `https://pablogarciaortega.com/es/` for the Spanish version.
+
+`robots.txt` allows everything except the repository's Markdown files (`README.md`, `AGENTS.md`), which GitHub Pages also publishes. `404.html` is `noindex` and is not in the sitemap.
 
 `sitemap.xml` is maintained by hand: update its `lastmod` dates when the content changes. It is submitted in Google Search Console.
