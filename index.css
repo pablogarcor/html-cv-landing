@@ -2,10 +2,12 @@
     --paper: #f7f4ee;
     --panel: #ffffff;
     --ink: #17202a;
-    --muted: #5e6875;
+    --muted: #57616d;
     --line: #d9ddd5;
     --accent: #275ca8;
     --accent-rgb: 39 92 168;
+    /* Acento para texto pequeño: al menos 4,5:1 sobre el fondo más oscuro de la página (TASK-49). */
+    --accent-text: var(--accent);
     --accent-strong: #cf3f49;
     --sun: #f4b942;
     --shadow: 0 22px 60px rgb(23 32 42 / 0.12);
@@ -50,6 +52,7 @@ body::before {
 body[data-locale="es"] {
     --accent: #0f7f70;
     --accent-rgb: 15 127 112;
+    --accent-text: #0d6c5f;
     --accent-strong: #e0523f;
 }
 
@@ -61,6 +64,29 @@ a {
 button,
 a {
     -webkit-tap-highlight-color: transparent;
+}
+
+/* Foco visible y común para todo lo enfocable: contorno sólido de --ink (más de 3:1 sobre cualquier fondo de la página). */
+:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 30;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: var(--ink);
+    color: #ffffff;
+    font-weight: 800;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+    transform: none;
 }
 
 .site-header {
@@ -117,7 +143,6 @@ a {
 .site-nav a:focus-visible {
     background: rgb(var(--accent-rgb) / 0.1);
     color: var(--ink);
-    outline: none;
 }
 
 .language-switcher {
@@ -143,11 +168,10 @@ a {
 
 .language-button:hover,
 .language-button:focus-visible,
-.language-button[aria-pressed="true"] {
+.language-button[aria-current="page"] {
     border-color: rgb(var(--accent-rgb) / 0.42);
     background: var(--accent);
     color: #ffffff;
-    outline: none;
 }
 
 main {
@@ -167,7 +191,7 @@ main {
 .eyebrow,
 .overline {
     margin: 0 0 12px;
-    color: var(--accent);
+    color: var(--accent-text);
     font-size: 0.78rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -249,7 +273,6 @@ h3 {
 
 .button:hover,
 .button:focus-visible {
-    outline: none;
     transform: translateY(-2px);
 }
 
@@ -414,7 +437,7 @@ h3 {
 .feature-index {
     display: block;
     margin-bottom: 10px;
-    color: var(--accent);
+    color: var(--accent-text);
     font-size: 0.82rem;
     font-weight: 900;
 }
@@ -446,7 +469,7 @@ h3 {
 
 .timeline-date {
     margin-bottom: 0;
-    color: var(--accent);
+    color: var(--accent-text);
     font-size: 0.82rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -537,7 +560,7 @@ h3 {
 }
 
 .profile-links a {
-    color: var(--accent);
+    color: var(--accent-text);
     font-weight: 750;
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -612,6 +635,9 @@ h3 {
         /* Si el menú no cabe, se desliza en horizontal; el borde difuminado avisa de que hay más. */
         -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
         mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+        /* Hueco al final y margen de desplazamiento: el enlace con foco nunca queda bajo el borde difuminado. */
+        padding-inline-end: 28px;
+        scroll-padding-inline: 28px;
     }
 
     .site-nav::-webkit-scrollbar {
@@ -624,6 +650,11 @@ h3 {
         min-height: 40px;
         padding: 8px 10px;
         white-space: nowrap;
+    }
+
+    /* El menú desliza (overflow) y recortaría un contorno exterior: aquí va por dentro. */
+    .site-nav a:focus-visible {
+        outline-offset: -3px;
     }
 
     .language-switcher {
