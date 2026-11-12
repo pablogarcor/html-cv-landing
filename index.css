@@ -20,6 +20,8 @@
 
 html {
     scroll-behavior: smooth;
+    /* Las anclas (#experience, #contact…) quedan por debajo de la cabecera fija. */
+    scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -579,18 +581,49 @@ h3 {
 }
 
 @media (max-width: 980px) {
+    :root {
+        --header-height: 108px;
+    }
+
+    /* Marca e idioma en una fila; el menú debajo, en una sola línea. */
     .site-header {
-        grid-template-columns: 1fr;
-        justify-items: start;
-        padding: 14px 20px;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 6px 12px;
+        padding: 8px 20px;
+    }
+
+    .brand {
+        min-width: 0;
+    }
+
+    .brand > span:last-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .site-nav {
         order: 3;
-        width: 100%;
+        grid-column: 1 / -1;
+        flex-wrap: nowrap;
         justify-content: flex-start;
         overflow-x: auto;
-        padding-bottom: 2px;
+        scrollbar-width: none;
+        /* Si el menú no cabe, se desliza en horizontal; el borde difuminado avisa de que hay más. */
+        -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+        mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    }
+
+    .site-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .site-nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 8px 10px;
+        white-space: nowrap;
     }
 
     .language-switcher {
@@ -642,11 +675,16 @@ h3 {
 
     .site-header {
         min-height: auto;
+        padding-inline: 14px;
+    }
+
+    .site-nav {
+        gap: 0;
     }
 
     .site-nav a {
-        padding-inline: 10px;
-        white-space: nowrap;
+        padding-inline: 8px;
+        font-size: 0.9rem;
     }
 
     .hero {
@@ -691,6 +729,13 @@ h3 {
 
     .contact-panel {
         padding: 22px;
+    }
+}
+
+@media (max-width: 360px) {
+    .brand {
+        gap: 8px;
+        font-size: 0.8125rem;
     }
 }
 
