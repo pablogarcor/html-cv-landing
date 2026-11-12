@@ -625,6 +625,65 @@ h3 {
     font-size: 0.92rem;
 }
 
+/* Página 404 (404.html): el vídeo de Vincent y el texto en inglés y en español. */
+.not-found {
+    display: grid;
+    min-height: calc(100svh - var(--header-height));
+    grid-template-columns: minmax(0, 480px) minmax(0, 1fr);
+    gap: 48px;
+    align-items: center;
+    padding: 48px 0;
+}
+
+.not-found-media {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--ink);
+    box-shadow: var(--shadow);
+}
+
+.not-found-video,
+.not-found-poster {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 480 / 270;
+}
+
+.not-found-poster {
+    display: none;
+}
+
+.not-found-copy {
+    display: grid;
+    gap: 28px;
+}
+
+.not-found-copy section + section {
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+}
+
+.not-found h1,
+.not-found h2 {
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+    line-height: 1.08;
+}
+
+.not-found-copy p:not(.eyebrow) {
+    max-width: 520px;
+    color: var(--muted);
+}
+
+/* La parte en español usa su acento, como /es/. */
+.not-found-copy [lang="es"] {
+    --accent: #0f7f70;
+    --accent-rgb: 15 127 112;
+    --accent-text: #0d6c5f;
+}
+
 .reveal {
     opacity: 1;
     transform: none;
@@ -810,7 +869,37 @@ h3 {
     }
 }
 
+@media (max-width: 980px) {
+    .not-found {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+        align-content: start;
+        align-items: start;
+        padding: 28px 0 40px;
+    }
+
+    .not-found-media {
+        max-width: 480px;
+    }
+}
+
+@media (max-width: 720px) {
+    .not-found h1,
+    .not-found h2 {
+        font-size: 1.75rem;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
+    /* 404: sin vídeo, solo el póster. */
+    .not-found-video {
+        display: none;
+    }
+
+    .not-found-poster {
+        display: block;
+    }
+
     html {
         scroll-behavior: auto;
     }
