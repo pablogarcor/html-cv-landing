@@ -41,4 +41,6 @@ languageButtons.forEach((button) => {
 
 contactEmailLinks.forEach((link) => {
     link.href = `mailto:${contactEmailAddress}`;
+    // Solo se ve al imprimir (index.css, @media print): en papel no hay mailto.
+    link.dataset.emailAddress = contactEmailAddress;
 });
